@@ -1,226 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#071225">
-<title>CopyGenius AI — Image to Text</title>
+<title>CopyGenius AI — Capture. Extract. Copy.</title>
 <style>
-:root{--bg:#071225;--panel:#0d1b32;--panel2:#102541;--line:#203b5f;--text:#eef6ff;--muted:#9bb0ca;--cyan:#39d8ef;--blue:#397cff;--green:#55e6b0}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at top,#12345b 0%,var(--bg) 52%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
-.wrap{width:min(920px,100%);margin:auto;padding:22px 16px 38px}
-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:34px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.4px}
-.logo{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#061226;font-weight:900;font-size:21px;box-shadow:0 7px 25px #238aff40}
-.pill{font-size:12px;color:#8fefff;border:1px solid #2d6e91;border-radius:99px;padding:7px 10px;background:#0b2942}
-.hero{text-align:center;margin:0 auto 25px;max-width:680px}
-.eyebrow{font-size:12px;font-weight:800;letter-spacing:2px;color:var(--cyan);text-transform:uppercase}
-h1{font-size:clamp(32px,7vw,54px);line-height:1.08;letter-spacing:-1.8px;margin:13px 0}
-.grad{background:linear-gradient(90deg,#fff,#6feaff);color:transparent;background-clip:text;-webkit-background-clip:text}
-.hero p{color:var(--muted);font-size:15px;line-height:1.65;margin:0 auto;max-width:540px}
-.card{background:linear-gradient(160deg,#10223b,#0a172b);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 20px 60px #0002;margin-bottom:16px}
-.cardhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}
-h2{font-size:17px;margin:0}
-.small{color:var(--muted);font-size:12px}
-.drop{border:1.5px dashed #38628c;background:#0a1b31;border-radius:16px;min-height:160px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;gap:9px}
-.uploadicon{font-size:29px}
-.drop strong{font-size:15px}
-.drop p{margin:0;color:var(--muted);font-size:13px}
-input[type=file]{display:none}
-.btn{border:0;border-radius:12px;padding:12px 16px;font-weight:750;font-size:14px;cursor:pointer;color:#061326;background:linear-gradient(100deg,#4a91ff,#43d7ed);box-shadow:0 7px 22px #2b9dff25}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-.btn.secondary{background:#142b47;color:#dcecff;border:1px solid #2b4c70;box-shadow:none}
-.btn.ghost{background:transparent;color:#9edfff;border:1px solid #2b4c70;box-shadow:none}
-.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
-.preview{display:none;margin-top:14px;text-align:center}
-.preview img{max-width:100%;max-height:270px;border-radius:12px;border:1px solid #284a70}
-.status{display:none;margin-top:13px;color:#8fefff;font-size:13px;line-height:1.5}
-.progress{height:6px;background:#142944;border-radius:9px;overflow:hidden;margin-top:8px}
-.bar{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .25s}
-textarea{width:100%;min-height:190px;resize:vertical;background:#071426;border:1px solid #294666;border-radius:14px;padding:14px;color:#edf7ff;font:14px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;outline:none}
-textarea:focus{border-color:var(--cyan)}
-.resulttop{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}
-.count{font-size:12px;color:var(--muted)}
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
-.feature{border:1px solid #1c3857;background:#0b1a2e;border-radius:14px;padding:14px}
-.feature b{display:block;font-size:13px;margin:7px 0 4px}
-.feature span{font-size:12px;color:var(--muted);line-height:1.4}
-footer{text-align:center;color:#6f88a8;font-size:12px;line-height:1.7;padding:16px}
-.notice{color:#8fa9c8;font-size:12px;line-height:1.5;margin-top:12px}
-@media(max-width:560px){.wrap{padding:17px 12px 28px}.card{padding:14px;border-radius:18px}.features{grid-template-columns:1fr}.feature{display:flex;gap:10px;align-items:flex-start}.feature b{margin-top:0}.actions .btn{flex:1}.pill{font-size:10px}.hero{margin-bottom:20px}}
+:root{--bg:#061022;--panel:#0b1830;--panel2:#0e2140;--line:#203b60;--muted:#9aafca;--cyan:#35d8f2;--blue:#2588ff;--white:#f3f8ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#153a67 0,transparent 50%),var(--bg);color:var(--white);font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}.wrap{max-width:980px;margin:auto;padding:0 17px}.nav{position:sticky;top:0;z-index:5;background:#061022ed;backdrop-filter:blur(12px);border-bottom:1px solid #182b46}.navin{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:68px}.brand{display:flex;align-items:center;gap:9px;font-weight:850;font-size:18px;white-space:nowrap}.logo{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#061022;font-size:22px;font-weight:950;background:linear-gradient(135deg,var(--blue),var(--cyan))}.links{display:flex;align-items:center;gap:17px;font-size:13px;color:#c4d4e9}.links a:hover{color:var(--cyan)}.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:13px 20px;font-weight:800;background:linear-gradient(100deg,#1688ff,#20c6e9);color:#fff;box-shadow:0 8px 28px #138dff26}.btn.outline{background:transparent;border:1px solid #345172;box-shadow:none}.btn.small{padding:10px 15px;font-size:13px}.hero{text-align:center;padding:66px 0 45px}.eyebrow{color:var(--cyan);font-weight:850;letter-spacing:2.5px;font-size:11px;text-transform:uppercase}.hero h1{font-size:clamp(39px,8vw,72px);line-height:1.03;letter-spacing:-2px;margin:19px auto;max-width:780px}.gradient{background:linear-gradient(90deg,#298bff,#45e0f0);background-clip:text;color:transparent}.hero p{max-width:640px;margin:0 auto 24px;color:var(--muted);font-size:16px;line-height:1.7}.heroactions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.tagline{font-size:12px;color:#819ab8;margin-top:20px}.section{padding:28px 0 44px}.sectionhead{text-align:center;margin-bottom:22px}.sectionhead h2{font-size:clamp(26px,5vw,38px);margin:8px 0}.sectionhead p{color:var(--muted);line-height:1.6;margin:0 auto;max-width:570px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.tile,.card{background:linear-gradient(155deg,#0d1f39,#09162a);border:1px solid var(--line);border-radius:19px;padding:20px}.tile .ico{font-size:25px}.tile h3{font-size:16px;margin:12px 0 7px}.tile p,.card p{font-size:13px;line-height:1.65;color:var(--muted);margin:0}.card{max-width:690px;margin:auto;padding:23px}.card h3{font-size:22px;margin:0 0 4px}.price{font-size:40px;font-weight:900;margin:13px 0}.list{padding:0;list-style:none;color:#d7e7fa;font-size:14px;line-height:2.3}.list li:before{content:"✓";color:var(--cyan);font-weight:900;margin-right:10px}.center{text-align:center}.scan{max-width:690px;margin:auto}.drop{border:1px dashed #3c6692;background:#08172b;border-radius:16px;padding:25px 14px;text-align:center;margin:14px 0}.drop p{margin:7px 0 13px}.hidden{display:none!important}input[type=file]{display:none}textarea{width:100%;min-height:175px;background:#061225;color:#edf7ff;border:1px solid #29486d;border-radius:13px;padding:14px;font:14px/1.6 ui-monospace,monospace;resize:vertical}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.status{color:var(--cyan);font-size:12px;margin-top:10px}.downloadbox{max-width:690px;margin:auto;text-align:center}.note{font-size:12px;color:#8ea5c2;line-height:1.6;margin-top:13px}.footer{border-top:1px solid #1a2e49;padding:25px 0 35px;color:#8198b6;text-align:center;font-size:12px;line-height:1.8}.mobilemenu{display:none}@media(max-width:620px){.navin{align-items:flex-start;padding:13px 0;flex-direction:column}.links{width:100%;justify-content:space-between;gap:8px}.links a{font-size:12px}.links .btn{padding:8px 11px}.hero{padding:48px 0 34px}.grid{grid-template-columns:1fr}.tile{display:flex;gap:13px}.tile .ico{padding-top:3px}.tile h3{margin:0 0 5px}.card{padding:17px}.hero p{font-size:14px}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <nav>
-    <div class="brand"><div class="logo">C</div><span>CopyGenius <span style="color:#55dff1">AI</span></span></div>
-    <div class="pill">✦ SMART OCR TOOL</div>
-  </nav>
-
-  <header class="hero">
-    <div class="eyebrow">Your smart text workspace</div>
-    <h1>Turn images into <span class="grad">editable text.</span></h1>
-    <p>Upload a screenshot or a clear photo, extract printed English text, edit it, and copy it in seconds.</p>
-  </header>
-
-  <section class="card">
-    <div class="cardhead">
-      <h2>① Upload an image</h2>
-      <span class="small">JPG · PNG · WEBP</span>
-    </div>
-    <label class="drop" for="fileInput" id="dropArea">
-      <div class="uploadicon">▧</div>
-      <strong>Choose a screenshot or photo</strong>
-      <p>Tap below to select an image from your phone</p>
-      <span class="btn">Choose Image</span>
-    </label>
-    <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp,image/bmp">
-    <div class="preview" id="previewBox"><img id="previewImg" alt="Selected image preview"></div>
-    <div class="actions">
-      <button class="btn" id="extractBtn" disabled>✦ Extract Text</button>
-      <button class="btn secondary" id="removeBtn" disabled>Remove Image</button>
-    </div>
-    <div class="status" id="status" aria-live="polite">
-      <span id="statusText">Preparing OCR engine…</span>
-      <div class="progress"><div class="bar" id="progressBar"></div></div>
-    </div>
-    <p class="notice">Tip: clear, well-lit images with straight printed text usually give better results. First use may take a little longer while the OCR engine loads.</p>
-  </section>
-
-  <section class="card">
-    <div class="resulttop">
-      <h2>② Extracted text</h2>
-      <span class="count" id="count">0 characters</span>
-    </div>
-    <textarea id="output" placeholder="Your extracted text will appear here. You can also type or edit text manually…"></textarea>
-    <div class="actions">
-      <button class="btn" id="copyBtn">Copy Text</button>
-      <button class="btn secondary" id="downloadBtn">Download .TXT</button>
-      <button class="btn ghost" id="clearBtn">Clear Text</button>
-    </div>
-    <div class="notice" id="message" aria-live="polite">Your selected image is processed in your browser using the OCR library; results can contain mistakes, so check the text before using it.</div>
-  </section>
-
-  <div class="features">
-    <div class="feature"><div>⚡</div><div><b>Quick extraction</b><span>Convert printed text from images into editable text.</span></div></div>
-    <div class="feature"><div>📋</div><div><b>One-tap copy</b><span>Copy the result or save it as a text file.</span></div></div>
-    <div class="feature"><div>🔒</div><div><b>Browser-based</b><span>The image is handled in your browser; OCR files load from a public CDN.</span></div></div>
-  </div>
-  <footer>CopyGenius AI · Student project prototype<br>Built for learning. Not affiliated with LensCopy.</footer>
+<div class="nav"><div class="wrap navin">
+<a class="brand" href="#home"><span class="logo">C</span><span>CopyGenius <span style="color:var(--cyan)">AI</span></span></a>
+<div class="links"><a href="#home">Home</a><a href="#scanner">Text Scanner</a><a href="#install">How to install</a><a href="#premium" class="btn small">✧ Premium</a></div>
+</div></div>
+<main>
+<section class="wrap hero" id="home">
+<div class="eyebrow">✦ Your smart text workspace</div>
+<h1>Capture any screen.<br><span class="gradient">Copy any text.</span></h1>
+<p>Turn screenshots and photos into editable text with OCR. Copy it, download it, and keep your work moving — all in one simple workspace.</p>
+<div class="heroactions"><a class="btn" href="#scanner">▧ Try Text Scanner</a><a class="btn outline" href="#install">Extension &amp; install guide</a></div>
+<div class="tagline">Image-to-text · One-tap copy · Student project prototype</div>
+</section>
+<section class="wrap section">
+<div class="sectionhead"><div class="eyebrow">Made to be simple</div><h2>Your text tools, in one place.</h2><p>Start with an image, extract text, then copy or save the result.</p></div>
+<div class="grid">
+<div class="tile"><div class="ico">▧</div><div><h3>Image to text</h3><p>Extract printed English text from a screenshot or photo using OCR.</p></div></div>
+<div class="tile"><div class="ico">📋</div><div><h3>Copy in one tap</h3><p>Copy the extracted text or download it as a TXT file.</p></div></div>
+<div class="tile"><div class="ico">✦</div><div><h3>Smart workspace</h3><p>Edit the result before using it in notes, assignments, or documents.</p></div></div>
 </div>
+</section>
+<section class="wrap section" id="scanner">
+<div class="sectionhead"><div class="eyebrow">Live tool</div><h2>Image to text scanner</h2><p>Choose an image and tap Extract Text. An internet connection is needed for the OCR engine.</p></div>
+<div class="card scan">
+<strong>① Upload an image</strong>
+<label class="drop" for="file"><div style="font-size:28px">▧</div><b>Choose a screenshot or photo</b><p>JPG, PNG, WEBP</p><span class="btn small">Choose Image</span></label>
+<input id="file" type="file" accept="image/*">
+<div id="preview" class="center hidden"><img id="img" alt="Image preview" style="max-width:100%;max-height:250px;border-radius:12px"></div>
+<div class="actions"><button id="extract" class="btn" disabled>✦ Extract Text</button><button id="remove" class="btn outline" disabled>Remove Image</button></div>
+<p id="status" class="status" aria-live="polite"></p>
+<hr style="border:0;border-top:1px solid #203b60;margin:22px 0">
+<strong>② Extracted text</strong><p id="count" style="margin:5px 0 10px">0 characters</p>
+<textarea id="text" placeholder="Extracted text will appear here. You can also type or edit text…"></textarea>
+<div class="actions"><button class="btn" id="copy">Copy Text</button><button class="btn outline" id="download">Download .TXT</button><button class="btn outline" id="clear">Clear Text</button></div>
+<p class="note">OCR may make mistakes. Check the text before using it. This version supports English OCR; Urdu OCR is not included yet.</p>
+</div>
+</section>
+<section class="wrap section" id="premium">
+<div class="sectionhead"><div class="eyebrow">Upgrade experience</div><h2>CopyGenius Premium</h2><p>A premium-style section for your project presentation. Subscription and payments are not connected in this demo.</p></div>
+<div class="card"><div class="eyebrow">PREMIUM</div><h3>Unlimited workflow</h3><p>Designed for a future premium plan</p><div class="price">Free <span style="font-size:13px;color:var(--muted);font-weight:500">demo version</span></div>
+<ul class="list"><li>Image-to-text scanner</li><li>Copy and download extracted text</li><li>Mobile-friendly workspace</li><li>Future feature ideas: translation and summaries</li></ul>
+<a href="#scanner" class="btn">Try the scanner</a>
+</div>
+</section>
+<section class="wrap section" id="install">
+<div class="sectionhead"><div class="eyebrow">Browser extension</div><h2>Ready to extend CopyGenius?</h2><p>The scanner on this page works as a website. Capturing text from any browser screen needs a separate, properly packaged browser extension.</p></div>
+<div class="card downloadbox"><div style="font-size:35px">⬇</div><h3>Extension package</h3><p>The extension ZIP is not included yet. We need to create and test the extension files before a real download button can work.</p><div class="actions" style="justify-content:center"><a class="btn outline" href="#scanner">Use website scanner</a><a class="btn" href="#installguide">Installation guide</a></div>
+<div id="installguide" style="text-align:left;margin-top:24px;border-top:1px solid #203b60;padding-top:18px"><h3 style="font-size:17px">Installation guide</h3><ol style="color:#c5d7ec;font-size:13px;line-height:1.9;padding-left:20px"><li>First, create the browser extension files (manifest, popup, and OCR/capture code).</li><li>Package the files into a ZIP archive.</li><li>Install it in a compatible desktop browser using its extension developer mode.</li><li>Mobile Chrome on Android does not support installing regular Chrome extensions directly; use a compatible browser or a computer for testing.</li></ol><p class="note">This page is a student project prototype and is not affiliated with LensCopy.</p></div>
+</div>
+</section>
+</main>
+<footer class="footer"><div class="wrap">CopyGenius AI · Student project prototype<br>Built for learning · Not affiliated with LensCopy</div></footer>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script>
-const fileInput = document.getElementById('fileInput');
-const previewBox = document.getElementById('previewBox');
-const previewImg = document.getElementById('previewImg');
-const extractBtn = document.getElementById('extractBtn');
-const removeBtn = document.getElementById('removeBtn');
-const output = document.getElementById('output');
-const status = document.getElementById('status');
-const statusText = document.getElementById('statusText');
-const progressBar = document.getElementById('progressBar');
-const count = document.getElementById('count');
-const message = document.getElementById('message');
-let selectedFile = null;
-let objectUrl = null;
-let busy = false;
-
-function setMessage(text){ message.textContent = text; }
-function updateCount(){ count.textContent = output.value.length + ' characters'; }
-output.addEventListener('input', updateCount);
-
-fileInput.addEventListener('change', () => {
-  const file = fileInput.files && fileInput.files[0];
-  if (!file) return;
-  if (!file.type.startsWith('image/')) {
-    setMessage('Please choose an image file (JPG, PNG, or WEBP).');
-    return;
-  }
-  selectedFile = file;
-  if (objectUrl) URL.revokeObjectURL(objectUrl);
-  objectUrl = URL.createObjectURL(file);
-  previewImg.src = objectUrl;
-  previewBox.style.display = 'block';
-  extractBtn.disabled = false;
-  removeBtn.disabled = false;
-  setMessage('Image selected: ' + file.name + '. Tap Extract Text to start.');
-});
-removeBtn.addEventListener('click', () => {
-  if (busy) return;
-  selectedFile = null;
-  fileInput.value = '';
-  previewBox.style.display = 'none';
-  previewImg.removeAttribute('src');
-  extractBtn.disabled = true;
-  removeBtn.disabled = true;
-  status.style.display = 'none';
-  progressBar.style.width = '0%';
-  setMessage('Image removed. Choose another image when ready.');
-});
-extractBtn.addEventListener('click', async () => {
-  if (!selectedFile || busy) return;
-  if (!window.Tesseract) {
-    setMessage('OCR library did not load. Check your internet connection, refresh, and try again.');
-    return;
-  }
-  busy = true;
-  extractBtn.disabled = true;
-  removeBtn.disabled = true;
-  status.style.display = 'block';
-  progressBar.style.width = '3%';
-  statusText.textContent = 'Loading OCR engine…';
-  setMessage('Processing your image. Keep this page open.');
-  let worker;
-  try {
-    worker = await Tesseract.createWorker('eng', 1, {
-      logger: info => {
-        if (info.status) statusText.textContent = info.status.charAt(0).toUpperCase() + info.status.slice(1) + (info.progress != null ? '… ' + Math.round(info.progress * 100) + '%' : '…');
-        if (info.progress != null) progressBar.style.width = Math.max(3, Math.round(info.progress * 100)) + '%';
-      }
-    });
-    const result = await worker.recognize(selectedFile);
-    output.value = (result.data.text || '').trim();
-    updateCount();
-    progressBar.style.width = '100%';
-    statusText.textContent = 'Finished!';
-    setMessage(output.value ? 'Text extracted. Review it for OCR mistakes, then copy or download it.' : 'No readable text found. Try a clearer image with larger printed text.');
-  } catch (err) {
-    console.error(err);
-    setMessage('Could not extract text. Check your internet connection and try a clearer JPG or PNG image.');
-    statusText.textContent = 'Something went wrong.';
-  } finally {
-    if (worker) await worker.terminate();
-    busy = false;
-    extractBtn.disabled = !selectedFile;
-    removeBtn.disabled = !selectedFile;
-  }
-});
-document.getElementById('copyBtn').addEventListener('click', async () => {
-  const text = output.value;
-  if (!text) { setMessage('There is no text to copy yet. Extract text or type something first.'); return; }
-  try {
-    await navigator.clipboard.writeText(text);
-    setMessage('Copied! You can now paste the text anywhere.');
-  } catch (e) {
-    output.focus(); output.select();
-    const ok = document.execCommand('copy');
-    setMessage(ok ? 'Copied! You can now paste the text anywhere.' : 'Select the text and choose Copy from your phone menu.');
-  }
-});
-document.getElementById('downloadBtn').addEventListener('click', () => {
-  if (!output.value.trim()) { setMessage('There is no text to download yet.'); return; }
-  const blob = new Blob([output.value], {type:'text/plain;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'copygenius-text.txt';
-  document.body.appendChild(a); a.click(); a.remove();
-  URL.revokeObjectURL(url);
-  setMessage('Text file download started.');
-});
-document.getElementById('clearBtn').addEventListener('click', () => {
-  output.value = ''; updateCount(); setMessage('Text cleared. You can extract another image or type new text.');
-});
+const file=document.getElementById('file'),extract=document.getElementById('extract'),remove=document.getElementById('remove'),preview=document.getElementById('preview'),img=document.getElementById('img'),out=document.getElementById('text'),status=document.getElementById('status'),count=document.getElementById('count');let selected=null,url=null,busy=false;
+function msg(s){status.textContent=s}function countText(){count.textContent=out.value.length+' characters'}out.addEventListener('input',countText);
+file.addEventListener('change',()=>{const f=file.files[0];if(!f)return;if(!f.type.startsWith('image/')){msg('Choose an image file.');return}selected=f;if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(f);img.src=url;preview.classList.remove('hidden');extract.disabled=false;remove.disabled=false;msg('Image ready. Tap Extract Text.')});
+remove.addEventListener('click',()=>{if(busy)return;selected=null;file.value='';preview.classList.add('hidden');img.removeAttribute('src');extract.disabled=true;remove.disabled=true;msg('Image removed.')});
+extract.addEventListener('click',async()=>{if(!selected||busy)return;if(!window.Tesseract){msg('OCR library did not load. Check internet and refresh.');return}busy=true;extract.disabled=true;remove.disabled=true;msg('Loading OCR engine…');let worker;try{worker=await Tesseract.createWorker('eng',1,{logger:m=>{if(m.status)msg(m.status+(m.progress!=null?' '+Math.round(m.progress*100)+'%':''))}});const result=await worker.recognize(selected);out.value=(result.data.text||'').trim();countText();msg(out.value?'Done! Check the text for mistakes.':'No text found. Try a clearer image.')}catch(e){msg('OCR failed. Check internet and try a clearer image.')}finally{if(worker)await worker.terminate();busy=false;extract.disabled=!selected;remove.disabled=!selected}});
+document.getElementById('copy').addEventListener('click',async()=>{if(!out.value){msg('No text to copy yet.');return}try{await navigator.clipboard.writeText(out.value);msg('Text copied!')}catch(e){out.select();msg('Text selected. Use your phone menu to copy.')}});
+document.getElementById('download').addEventListener('click',()=>{if(!out.value.trim()){msg('No text to download yet.');return}const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([out.value],{type:'text/plain;charset=utf-8'}));a.download='copygenius-text.txt';a.click();URL.revokeObjectURL(a.href);msg('Text file download started.')});
+document.getElementById('clear').addEventListener('click',()=>{out.value='';countText();msg('Text cleared.')});
 </script>
-</body>
-</html>
+</body></html>
